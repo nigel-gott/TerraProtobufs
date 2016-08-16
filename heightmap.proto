@@ -3,6 +3,8 @@ syntax = "proto3";
 option java_package = "com.nigelgott.terra.protobufs";
 option csharp_namespace = "NigelGott.Terra.Protobufs";
 
-message HeightMap {
-	repeated float heightMap = 1;
+message HeightMapMessage {
+    required int32 x = 1;
+    required int32 y = 2;
+	repeated float heightMap = 3;
 }
