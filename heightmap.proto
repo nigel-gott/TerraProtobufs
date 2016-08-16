@@ -6,5 +6,5 @@ option csharp_namespace = "NigelGott.Terra.Protobufs";
 message HeightMapMessage {
     required int32 x = 1;
     required int32 y = 2;
-	repeated float heightMap = 3;
+	repeated float height = 3;
 }
