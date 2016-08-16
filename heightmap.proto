@@ -1,0 +1,3 @@
+message HeightMap {
+	repeated float heightMap = 1;
+}
