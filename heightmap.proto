@@ -1,3 +1,5 @@
+syntax = "proto3";
+
 message HeightMap {
 	repeated float heightMap = 1;
 }
