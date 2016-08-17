@@ -20,13 +20,21 @@ sourceCompatibility = 1.8
 
 protobuf {
     protoc {
-        artifact = 'com.google.protobuf:protoc:3.0.0-alpha-3'
+        artifact = 'com.google.protobuf:protoc:3.0.0'
+    }
+    generateProtoTasks {
+        all().each {
+            task ->
+            task.builtins {
+                java {}
+                csharp {}
+            }
+        }
     }
     generatedFilesBaseDir = "$projectDir/src/"
 }
 
 repositories {
-    mavenLocal()
     mavenCentral()
 }
 

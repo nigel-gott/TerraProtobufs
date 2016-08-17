@@ -6,7 +6,13 @@ package com.nigelgott.terra.protobufs;
 public final class Heightmap {
   private Heightmap() {}
   public static void registerAllExtensions(
+      com.google.protobuf.ExtensionRegistryLite registry) {
+  }
+
+  public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
+    registerAllExtensions(
+        (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   public interface HeightMapMessageOrBuilder extends
       // @@protoc_insertion_point(interface_extends:HeightMapMessage)
@@ -23,27 +29,27 @@ public final class Heightmap {
     int getY();
 
     /**
-     * <code>repeated float height = 3;</code>
+     * <code>repeated int32 height = 3;</code>
      */
-    java.util.List<java.lang.Float> getHeightList();
+    java.util.List<java.lang.Integer> getHeightList();
     /**
-     * <code>repeated float height = 3;</code>
+     * <code>repeated int32 height = 3;</code>
      */
     int getHeightCount();
     /**
-     * <code>repeated float height = 3;</code>
+     * <code>repeated int32 height = 3;</code>
      */
-    float getHeight(int index);
+    int getHeight(int index);
   }
   /**
    * Protobuf type {@code HeightMapMessage}
    */
   public  static final class HeightMapMessage extends
-      com.google.protobuf.GeneratedMessage implements
+      com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:HeightMapMessage)
       HeightMapMessageOrBuilder {
     // Use HeightMapMessage.newBuilder() to construct.
-    private HeightMapMessage(com.google.protobuf.GeneratedMessage.Builder builder) {
+    private HeightMapMessage(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
     private HeightMapMessage() {
@@ -59,7 +65,8 @@ public final class Heightmap {
     }
     private HeightMapMessage(
         com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       try {
@@ -86,23 +93,23 @@ public final class Heightmap {
               y_ = input.readInt32();
               break;
             }
-            case 29: {
+            case 24: {
               if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-                height_ = new java.util.ArrayList<java.lang.Float>();
+                height_ = new java.util.ArrayList<java.lang.Integer>();
                 mutable_bitField0_ |= 0x00000004;
               }
-              height_.add(input.readFloat());
+              height_.add(input.readInt32());
               break;
             }
             case 26: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               if (!((mutable_bitField0_ & 0x00000004) == 0x00000004) && input.getBytesUntilLimit() > 0) {
-                height_ = new java.util.ArrayList<java.lang.Float>();
+                height_ = new java.util.ArrayList<java.lang.Integer>();
                 mutable_bitField0_ |= 0x00000004;
               }
               while (input.getBytesUntilLimit() > 0) {
-                height_.add(input.readFloat());
+                height_.add(input.readInt32());
               }
               input.popLimit(limit);
               break;
@@ -110,11 +117,10 @@ public final class Heightmap {
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw new RuntimeException(e.setUnfinishedMessage(this));
+        throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new RuntimeException(
-            new com.google.protobuf.InvalidProtocolBufferException(
-                e.getMessage()).setUnfinishedMessage(this));
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           height_ = java.util.Collections.unmodifiableList(height_);
@@ -127,7 +133,7 @@ public final class Heightmap {
       return com.nigelgott.terra.protobufs.Heightmap.internal_static_HeightMapMessage_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.nigelgott.terra.protobufs.Heightmap.internal_static_HeightMapMessage_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -154,24 +160,24 @@ public final class Heightmap {
     }
 
     public static final int HEIGHT_FIELD_NUMBER = 3;
-    private java.util.List<java.lang.Float> height_;
+    private java.util.List<java.lang.Integer> height_;
     /**
-     * <code>repeated float height = 3;</code>
+     * <code>repeated int32 height = 3;</code>
      */
-    public java.util.List<java.lang.Float>
+    public java.util.List<java.lang.Integer>
         getHeightList() {
       return height_;
     }
     /**
-     * <code>repeated float height = 3;</code>
+     * <code>repeated int32 height = 3;</code>
      */
     public int getHeightCount() {
       return height_.size();
     }
     /**
-     * <code>repeated float height = 3;</code>
+     * <code>repeated int32 height = 3;</code>
      */
-    public float getHeight(int index) {
+    public int getHeight(int index) {
       return height_.get(index);
     }
     private int heightMemoizedSerializedSize = -1;
@@ -196,17 +202,16 @@ public final class Heightmap {
         output.writeInt32(2, y_);
       }
       if (getHeightList().size() > 0) {
-        output.writeRawVarint32(26);
-        output.writeRawVarint32(heightMemoizedSerializedSize);
+        output.writeUInt32NoTag(26);
+        output.writeUInt32NoTag(heightMemoizedSerializedSize);
       }
       for (int i = 0; i < height_.size(); i++) {
-        output.writeFloatNoTag(height_.get(i));
+        output.writeInt32NoTag(height_.get(i));
       }
     }
 
-    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSerializedSize;
+      int size = memoizedSize;
       if (size != -1) return size;
 
       size = 0;
@@ -220,7 +225,10 @@ public final class Heightmap {
       }
       {
         int dataSize = 0;
-        dataSize = 4 * getHeightList().size();
+        for (int i = 0; i < height_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(height_.get(i));
+        }
         size += dataSize;
         if (!getHeightList().isEmpty()) {
           size += 1;
@@ -229,11 +237,51 @@ public final class Heightmap {
         }
         heightMemoizedSerializedSize = dataSize;
       }
-      memoizedSerializedSize = size;
+      memoizedSize = size;
       return size;
     }
 
     private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.nigelgott.terra.protobufs.Heightmap.HeightMapMessage)) {
+        return super.equals(obj);
+      }
+      com.nigelgott.terra.protobufs.Heightmap.HeightMapMessage other = (com.nigelgott.terra.protobufs.Heightmap.HeightMapMessage) obj;
+
+      boolean result = true;
+      result = result && (getX()
+          == other.getX());
+      result = result && (getY()
+          == other.getY());
+      result = result && getHeightList()
+          .equals(other.getHeightList());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (37 * hash) + X_FIELD_NUMBER;
+      hash = (53 * hash) + getX();
+      hash = (37 * hash) + Y_FIELD_NUMBER;
+      hash = (53 * hash) + getY();
+      if (getHeightCount() > 0) {
+        hash = (37 * hash) + HEIGHT_FIELD_NUMBER;
+        hash = (53 * hash) + getHeightList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
     public static com.nigelgott.terra.protobufs.Heightmap.HeightMapMessage parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -257,34 +305,40 @@ public final class Heightmap {
     }
     public static com.nigelgott.terra.protobufs.Heightmap.HeightMapMessage parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static com.nigelgott.terra.protobufs.Heightmap.HeightMapMessage parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.nigelgott.terra.protobufs.Heightmap.HeightMapMessage parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.nigelgott.terra.protobufs.Heightmap.HeightMapMessage parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.nigelgott.terra.protobufs.Heightmap.HeightMapMessage parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static com.nigelgott.terra.protobufs.Heightmap.HeightMapMessage parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -301,7 +355,7 @@ public final class Heightmap {
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -309,7 +363,7 @@ public final class Heightmap {
      * Protobuf type {@code HeightMapMessage}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:HeightMapMessage)
         com.nigelgott.terra.protobufs.Heightmap.HeightMapMessageOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
@@ -317,7 +371,7 @@ public final class Heightmap {
         return com.nigelgott.terra.protobufs.Heightmap.internal_static_HeightMapMessage_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.nigelgott.terra.protobufs.Heightmap.internal_static_HeightMapMessage_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -330,12 +384,13 @@ public final class Heightmap {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
         }
       }
       public Builder clear() {
@@ -382,6 +437,32 @@ public final class Heightmap {
         return result;
       }
 
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.nigelgott.terra.protobufs.Heightmap.HeightMapMessage) {
           return mergeFrom((com.nigelgott.terra.protobufs.Heightmap.HeightMapMessage)other);
@@ -426,7 +507,7 @@ public final class Heightmap {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (com.nigelgott.terra.protobufs.Heightmap.HeightMapMessage) e.getUnfinishedMessage();
-          throw e;
+          throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -488,56 +569,56 @@ public final class Heightmap {
         return this;
       }
 
-      private java.util.List<java.lang.Float> height_ = java.util.Collections.emptyList();
+      private java.util.List<java.lang.Integer> height_ = java.util.Collections.emptyList();
       private void ensureHeightIsMutable() {
         if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          height_ = new java.util.ArrayList<java.lang.Float>(height_);
+          height_ = new java.util.ArrayList<java.lang.Integer>(height_);
           bitField0_ |= 0x00000004;
          }
       }
       /**
-       * <code>repeated float height = 3;</code>
+       * <code>repeated int32 height = 3;</code>
        */
-      public java.util.List<java.lang.Float>
+      public java.util.List<java.lang.Integer>
           getHeightList() {
         return java.util.Collections.unmodifiableList(height_);
       }
       /**
-       * <code>repeated float height = 3;</code>
+       * <code>repeated int32 height = 3;</code>
        */
       public int getHeightCount() {
         return height_.size();
       }
       /**
-       * <code>repeated float height = 3;</code>
+       * <code>repeated int32 height = 3;</code>
        */
-      public float getHeight(int index) {
+      public int getHeight(int index) {
         return height_.get(index);
       }
       /**
-       * <code>repeated float height = 3;</code>
+       * <code>repeated int32 height = 3;</code>
        */
       public Builder setHeight(
-          int index, float value) {
+          int index, int value) {
         ensureHeightIsMutable();
         height_.set(index, value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated float height = 3;</code>
+       * <code>repeated int32 height = 3;</code>
        */
-      public Builder addHeight(float value) {
+      public Builder addHeight(int value) {
         ensureHeightIsMutable();
         height_.add(value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated float height = 3;</code>
+       * <code>repeated int32 height = 3;</code>
        */
       public Builder addAllHeight(
-          java.lang.Iterable<? extends java.lang.Float> values) {
+          java.lang.Iterable<? extends java.lang.Integer> values) {
         ensureHeightIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
             values, height_);
@@ -545,7 +626,7 @@ public final class Heightmap {
         return this;
       }
       /**
-       * <code>repeated float height = 3;</code>
+       * <code>repeated int32 height = 3;</code>
        */
       public Builder clearHeight() {
         height_ = java.util.Collections.emptyList();
@@ -577,24 +658,19 @@ public final class Heightmap {
       return DEFAULT_INSTANCE;
     }
 
-    public static final com.google.protobuf.Parser<HeightMapMessage> PARSER =
-        new com.google.protobuf.AbstractParser<HeightMapMessage>() {
+    private static final com.google.protobuf.Parser<HeightMapMessage>
+        PARSER = new com.google.protobuf.AbstractParser<HeightMapMessage>() {
       public HeightMapMessage parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        try {
           return new HeightMapMessage(input, extensionRegistry);
-        } catch (RuntimeException e) {
-          if (e.getCause() instanceof
-              com.google.protobuf.InvalidProtocolBufferException) {
-            throw (com.google.protobuf.InvalidProtocolBufferException)
-                e.getCause();
-          }
-          throw e;
-        }
       }
     };
+
+    public static com.google.protobuf.Parser<HeightMapMessage> parser() {
+      return PARSER;
+    }
 
     @java.lang.Override
     public com.google.protobuf.Parser<HeightMapMessage> getParserForType() {
@@ -607,23 +683,23 @@ public final class Heightmap {
 
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_HeightMapMessage_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_HeightMapMessage_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
     return descriptor;
   }
-  private static com.google.protobuf.Descriptors.FileDescriptor
+  private static  com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
     java.lang.String[] descriptorData = {
       "\n-com/nigelgott/terra/protobufs/heightma" +
       "p.proto\"8\n\020HeightMapMessage\022\t\n\001x\030\001 \001(\005\022\t" +
-      "\n\001y\030\002 \001(\005\022\016\n\006height\030\003 \003(\002B;\n\035com.nigelgo" +
+      "\n\001y\030\002 \001(\005\022\016\n\006height\030\003 \003(\005B;\n\035com.nigelgo" +
       "tt.terra.protobufs\252\002\031NigelGott.Terra.Pro" +
       "tobufsb\006proto3"
     };
@@ -642,7 +718,7 @@ public final class Heightmap {
     internal_static_HeightMapMessage_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_HeightMapMessage_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_HeightMapMessage_descriptor,
         new java.lang.String[] { "X", "Y", "Height", });
   }
