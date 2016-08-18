@@ -26,6 +26,16 @@ public final class Request {
      * <code>optional .RequestMessage.RequestType type = 1;</code>
      */
     com.nigelgott.terra.protobufs.Request.RequestMessage.RequestType getType();
+
+    /**
+     * <code>optional string playerName = 2;</code>
+     */
+    java.lang.String getPlayerName();
+    /**
+     * <code>optional string playerName = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getPlayerNameBytes();
   }
   /**
    * Protobuf type {@code RequestMessage}
@@ -40,6 +50,7 @@ public final class Request {
     }
     private RequestMessage() {
       type_ = 0;
+      playerName_ = "";
     }
 
     @java.lang.Override
@@ -71,6 +82,12 @@ public final class Request {
               int rawValue = input.readEnum();
 
               type_ = rawValue;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              playerName_ = s;
               break;
             }
           }
@@ -201,6 +218,40 @@ public final class Request {
       return result == null ? com.nigelgott.terra.protobufs.Request.RequestMessage.RequestType.UNRECOGNIZED : result;
     }
 
+    public static final int PLAYERNAME_FIELD_NUMBER = 2;
+    private volatile java.lang.Object playerName_;
+    /**
+     * <code>optional string playerName = 2;</code>
+     */
+    public java.lang.String getPlayerName() {
+      java.lang.Object ref = playerName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        playerName_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>optional string playerName = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getPlayerNameBytes() {
+      java.lang.Object ref = playerName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        playerName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -216,6 +267,9 @@ public final class Request {
       if (type_ != com.nigelgott.terra.protobufs.Request.RequestMessage.RequestType.INITIAL_WORLD_STATE.getNumber()) {
         output.writeEnum(1, type_);
       }
+      if (!getPlayerNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, playerName_);
+      }
     }
 
     public int getSerializedSize() {
@@ -226,6 +280,9 @@ public final class Request {
       if (type_ != com.nigelgott.terra.protobufs.Request.RequestMessage.RequestType.INITIAL_WORLD_STATE.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, type_);
+      }
+      if (!getPlayerNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, playerName_);
       }
       memoizedSize = size;
       return size;
@@ -244,6 +301,8 @@ public final class Request {
 
       boolean result = true;
       result = result && type_ == other.type_;
+      result = result && getPlayerName()
+          .equals(other.getPlayerName());
       return result;
     }
 
@@ -256,6 +315,8 @@ public final class Request {
       hash = (19 * hash) + getDescriptorForType().hashCode();
       hash = (37 * hash) + TYPE_FIELD_NUMBER;
       hash = (53 * hash) + type_;
+      hash = (37 * hash) + PLAYERNAME_FIELD_NUMBER;
+      hash = (53 * hash) + getPlayerName().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -376,6 +437,8 @@ public final class Request {
         super.clear();
         type_ = 0;
 
+        playerName_ = "";
+
         return this;
       }
 
@@ -399,6 +462,7 @@ public final class Request {
       public com.nigelgott.terra.protobufs.Request.RequestMessage buildPartial() {
         com.nigelgott.terra.protobufs.Request.RequestMessage result = new com.nigelgott.terra.protobufs.Request.RequestMessage(this);
         result.type_ = type_;
+        result.playerName_ = playerName_;
         onBuilt();
         return result;
       }
@@ -442,6 +506,10 @@ public final class Request {
         if (other == com.nigelgott.terra.protobufs.Request.RequestMessage.getDefaultInstance()) return this;
         if (other.type_ != 0) {
           setTypeValue(other.getTypeValue());
+        }
+        if (!other.getPlayerName().isEmpty()) {
+          playerName_ = other.playerName_;
+          onChanged();
         }
         onChanged();
         return this;
@@ -512,6 +580,75 @@ public final class Request {
         onChanged();
         return this;
       }
+
+      private java.lang.Object playerName_ = "";
+      /**
+       * <code>optional string playerName = 2;</code>
+       */
+      public java.lang.String getPlayerName() {
+        java.lang.Object ref = playerName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          playerName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string playerName = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getPlayerNameBytes() {
+        java.lang.Object ref = playerName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          playerName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string playerName = 2;</code>
+       */
+      public Builder setPlayerName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        playerName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string playerName = 2;</code>
+       */
+      public Builder clearPlayerName() {
+        
+        playerName_ = getDefaultInstance().getPlayerName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string playerName = 2;</code>
+       */
+      public Builder setPlayerNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        playerName_ = value;
+        onChanged();
+        return this;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
@@ -576,11 +713,11 @@ public final class Request {
   static {
     java.lang.String[] descriptorData = {
       "\n+com/nigelgott/terra/protobufs/request." +
-      "proto\"c\n\016RequestMessage\022)\n\004type\030\001 \001(\0162\033." +
-      "RequestMessage.RequestType\"&\n\013RequestTyp" +
-      "e\022\027\n\023INITIAL_WORLD_STATE\020\000B;\n\035com.nigelg" +
-      "ott.terra.protobufs\252\002\031NigelGott.Terra.Pr" +
-      "otobufsb\006proto3"
+      "proto\"w\n\016RequestMessage\022)\n\004type\030\001 \001(\0162\033." +
+      "RequestMessage.RequestType\022\022\n\nplayerName" +
+      "\030\002 \001(\t\"&\n\013RequestType\022\027\n\023INITIAL_WORLD_S" +
+      "TATE\020\000B;\n\035com.nigelgott.terra.protobufs\252" +
+      "\002\031NigelGott.Terra.Protobufsb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -599,7 +736,7 @@ public final class Request {
     internal_static_RequestMessage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_RequestMessage_descriptor,
-        new java.lang.String[] { "Type", });
+        new java.lang.String[] { "Type", "PlayerName", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

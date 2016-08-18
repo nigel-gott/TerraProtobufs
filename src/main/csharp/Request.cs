@@ -23,14 +23,15 @@ namespace NigelGott.Terra.Protobufs {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "Citjb20vbmlnZWxnb3R0L3RlcnJhL3Byb3RvYnVmcy9yZXF1ZXN0LnByb3Rv",
-            "ImMKDlJlcXVlc3RNZXNzYWdlEikKBHR5cGUYASABKA4yGy5SZXF1ZXN0TWVz",
-            "c2FnZS5SZXF1ZXN0VHlwZSImCgtSZXF1ZXN0VHlwZRIXChNJTklUSUFMX1dP",
-            "UkxEX1NUQVRFEABCOwodY29tLm5pZ2VsZ290dC50ZXJyYS5wcm90b2J1ZnOq",
-            "AhlOaWdlbEdvdHQuVGVycmEuUHJvdG9idWZzYgZwcm90bzM="));
+            "IncKDlJlcXVlc3RNZXNzYWdlEikKBHR5cGUYASABKA4yGy5SZXF1ZXN0TWVz",
+            "c2FnZS5SZXF1ZXN0VHlwZRISCgpwbGF5ZXJOYW1lGAIgASgJIiYKC1JlcXVl",
+            "c3RUeXBlEhcKE0lOSVRJQUxfV09STERfU1RBVEUQAEI7Ch1jb20ubmlnZWxn",
+            "b3R0LnRlcnJhLnByb3RvYnVmc6oCGU5pZ2VsR290dC5UZXJyYS5Qcm90b2J1",
+            "ZnNiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::NigelGott.Terra.Protobufs.RequestMessage), global::NigelGott.Terra.Protobufs.RequestMessage.Parser, new[]{ "Type" }, null, new[]{ typeof(global::NigelGott.Terra.Protobufs.RequestMessage.Types.RequestType) }, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::NigelGott.Terra.Protobufs.RequestMessage), global::NigelGott.Terra.Protobufs.RequestMessage.Parser, new[]{ "Type", "PlayerName" }, null, new[]{ typeof(global::NigelGott.Terra.Protobufs.RequestMessage.Types.RequestType) }, null)
           }));
     }
     #endregion
@@ -62,6 +63,7 @@ namespace NigelGott.Terra.Protobufs {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public RequestMessage(RequestMessage other) : this() {
       type_ = other.type_;
+      playerName_ = other.playerName_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -80,6 +82,17 @@ namespace NigelGott.Terra.Protobufs {
       }
     }
 
+    /// <summary>Field number for the "playerName" field.</summary>
+    public const int PlayerNameFieldNumber = 2;
+    private string playerName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string PlayerName {
+      get { return playerName_; }
+      set {
+        playerName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as RequestMessage);
@@ -94,6 +107,7 @@ namespace NigelGott.Terra.Protobufs {
         return true;
       }
       if (Type != other.Type) return false;
+      if (PlayerName != other.PlayerName) return false;
       return true;
     }
 
@@ -101,6 +115,7 @@ namespace NigelGott.Terra.Protobufs {
     public override int GetHashCode() {
       int hash = 1;
       if (Type != 0) hash ^= Type.GetHashCode();
+      if (PlayerName.Length != 0) hash ^= PlayerName.GetHashCode();
       return hash;
     }
 
@@ -115,6 +130,10 @@ namespace NigelGott.Terra.Protobufs {
         output.WriteRawTag(8);
         output.WriteEnum((int) Type);
       }
+      if (PlayerName.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(PlayerName);
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -122,6 +141,9 @@ namespace NigelGott.Terra.Protobufs {
       int size = 0;
       if (Type != 0) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Type);
+      }
+      if (PlayerName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(PlayerName);
       }
       return size;
     }
@@ -133,6 +155,9 @@ namespace NigelGott.Terra.Protobufs {
       }
       if (other.Type != 0) {
         Type = other.Type;
+      }
+      if (other.PlayerName.Length != 0) {
+        PlayerName = other.PlayerName;
       }
     }
 
@@ -146,6 +171,10 @@ namespace NigelGott.Terra.Protobufs {
             break;
           case 8: {
             type_ = (global::NigelGott.Terra.Protobufs.RequestMessage.Types.RequestType) input.ReadEnum();
+            break;
+          }
+          case 18: {
+            PlayerName = input.ReadString();
             break;
           }
         }
