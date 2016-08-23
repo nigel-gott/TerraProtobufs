@@ -34,6 +34,11 @@ protobuf {
     generatedFilesBaseDir = "$projectDir/src/"
 }
 
+task copyCSharp(type: Copy, dependsOn: 'install'){
+    from 'src/main/csharp'
+    into 'C:\\Users\\Nigel\\Documents\\Unity\\Terra\\Assets\\Scripts\\TerraProtobufs'
+}
+
 repositories {
     mavenCentral()
 }
