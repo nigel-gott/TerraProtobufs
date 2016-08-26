@@ -3,10 +3,16 @@ syntax = "proto3";
 option java_package = "com.nigelgott.terra.protobufs";
 option csharp_namespace = "NigelGott.Terra.Protobufs";
 
+import "com/nigelgott/terra/protobufs/request.proto";
+
 message ResponseMessage {
     enum ResponseType {
-        TERRAIN = 0;
+        WORLD_STATE = 0;
     }
     ResponseType type = 1;
-    int32 numOfResponses = 2;
+}
+
+message WorldState{
+    int32 worldSize = 1;
+    FloatCoord playerLocation = 2;
 }

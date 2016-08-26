@@ -5,8 +5,25 @@ option csharp_namespace = "NigelGott.Terra.Protobufs";
 
 message RequestMessage {
     enum RequestType {
-        INITIAL_WORLD_STATE = 0;
+        WORLD_STATE = 0;
+        TERRAIN_CHUNKS = 1;
+        PLAYER_LOCATION_CHANGE = 2;
     }
     RequestType type = 1;
     string playerName = 2;
+}
+
+message ChunkRequest {
+    int32 chunkSize = 1;
+    repeated IntCoord chunkCoords = 2;
+}
+
+message IntCoord {
+    int32 x = 1;
+    int32 y = 2;
+}
+
+message FloatCoord {
+    float x = 1;
+    float y = 2;
 }

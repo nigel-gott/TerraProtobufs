@@ -26,11 +26,6 @@ public final class Response {
      * <code>optional .ResponseMessage.ResponseType type = 1;</code>
      */
     com.nigelgott.terra.protobufs.Response.ResponseMessage.ResponseType getType();
-
-    /**
-     * <code>optional int32 numOfResponses = 2;</code>
-     */
-    int getNumOfResponses();
   }
   /**
    * Protobuf type {@code ResponseMessage}
@@ -45,7 +40,6 @@ public final class Response {
     }
     private ResponseMessage() {
       type_ = 0;
-      numOfResponses_ = 0;
     }
 
     @java.lang.Override
@@ -79,11 +73,6 @@ public final class Response {
               type_ = rawValue;
               break;
             }
-            case 16: {
-
-              numOfResponses_ = input.readInt32();
-              break;
-            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -113,16 +102,16 @@ public final class Response {
     public enum ResponseType
         implements com.google.protobuf.ProtocolMessageEnum {
       /**
-       * <code>TERRAIN = 0;</code>
+       * <code>WORLD_STATE = 0;</code>
        */
-      TERRAIN(0),
+      WORLD_STATE(0),
       UNRECOGNIZED(-1),
       ;
 
       /**
-       * <code>TERRAIN = 0;</code>
+       * <code>WORLD_STATE = 0;</code>
        */
-      public static final int TERRAIN_VALUE = 0;
+      public static final int WORLD_STATE_VALUE = 0;
 
 
       public final int getNumber() {
@@ -143,7 +132,7 @@ public final class Response {
 
       public static ResponseType forNumber(int value) {
         switch (value) {
-          case 0: return TERRAIN;
+          case 0: return WORLD_STATE;
           default: return null;
         }
       }
@@ -212,15 +201,6 @@ public final class Response {
       return result == null ? com.nigelgott.terra.protobufs.Response.ResponseMessage.ResponseType.UNRECOGNIZED : result;
     }
 
-    public static final int NUMOFRESPONSES_FIELD_NUMBER = 2;
-    private int numOfResponses_;
-    /**
-     * <code>optional int32 numOfResponses = 2;</code>
-     */
-    public int getNumOfResponses() {
-      return numOfResponses_;
-    }
-
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -233,11 +213,8 @@ public final class Response {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (type_ != com.nigelgott.terra.protobufs.Response.ResponseMessage.ResponseType.TERRAIN.getNumber()) {
+      if (type_ != com.nigelgott.terra.protobufs.Response.ResponseMessage.ResponseType.WORLD_STATE.getNumber()) {
         output.writeEnum(1, type_);
-      }
-      if (numOfResponses_ != 0) {
-        output.writeInt32(2, numOfResponses_);
       }
     }
 
@@ -246,13 +223,9 @@ public final class Response {
       if (size != -1) return size;
 
       size = 0;
-      if (type_ != com.nigelgott.terra.protobufs.Response.ResponseMessage.ResponseType.TERRAIN.getNumber()) {
+      if (type_ != com.nigelgott.terra.protobufs.Response.ResponseMessage.ResponseType.WORLD_STATE.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, type_);
-      }
-      if (numOfResponses_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, numOfResponses_);
       }
       memoizedSize = size;
       return size;
@@ -271,8 +244,6 @@ public final class Response {
 
       boolean result = true;
       result = result && type_ == other.type_;
-      result = result && (getNumOfResponses()
-          == other.getNumOfResponses());
       return result;
     }
 
@@ -285,8 +256,6 @@ public final class Response {
       hash = (19 * hash) + getDescriptorForType().hashCode();
       hash = (37 * hash) + TYPE_FIELD_NUMBER;
       hash = (53 * hash) + type_;
-      hash = (37 * hash) + NUMOFRESPONSES_FIELD_NUMBER;
-      hash = (53 * hash) + getNumOfResponses();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -407,8 +376,6 @@ public final class Response {
         super.clear();
         type_ = 0;
 
-        numOfResponses_ = 0;
-
         return this;
       }
 
@@ -432,7 +399,6 @@ public final class Response {
       public com.nigelgott.terra.protobufs.Response.ResponseMessage buildPartial() {
         com.nigelgott.terra.protobufs.Response.ResponseMessage result = new com.nigelgott.terra.protobufs.Response.ResponseMessage(this);
         result.type_ = type_;
-        result.numOfResponses_ = numOfResponses_;
         onBuilt();
         return result;
       }
@@ -476,9 +442,6 @@ public final class Response {
         if (other == com.nigelgott.terra.protobufs.Response.ResponseMessage.getDefaultInstance()) return this;
         if (other.type_ != 0) {
           setTypeValue(other.getTypeValue());
-        }
-        if (other.getNumOfResponses() != 0) {
-          setNumOfResponses(other.getNumOfResponses());
         }
         onChanged();
         return this;
@@ -549,32 +512,6 @@ public final class Response {
         onChanged();
         return this;
       }
-
-      private int numOfResponses_ ;
-      /**
-       * <code>optional int32 numOfResponses = 2;</code>
-       */
-      public int getNumOfResponses() {
-        return numOfResponses_;
-      }
-      /**
-       * <code>optional int32 numOfResponses = 2;</code>
-       */
-      public Builder setNumOfResponses(int value) {
-        
-        numOfResponses_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 numOfResponses = 2;</code>
-       */
-      public Builder clearNumOfResponses() {
-        
-        numOfResponses_ = 0;
-        onChanged();
-        return this;
-      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
@@ -624,11 +561,639 @@ public final class Response {
 
   }
 
+  public interface WorldStateOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:WorldState)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 worldSize = 1;</code>
+     */
+    int getWorldSize();
+
+    /**
+     * <code>optional .FloatCoord playerLocation = 2;</code>
+     */
+    boolean hasPlayerLocation();
+    /**
+     * <code>optional .FloatCoord playerLocation = 2;</code>
+     */
+    com.nigelgott.terra.protobufs.Request.FloatCoord getPlayerLocation();
+    /**
+     * <code>optional .FloatCoord playerLocation = 2;</code>
+     */
+    com.nigelgott.terra.protobufs.Request.FloatCoordOrBuilder getPlayerLocationOrBuilder();
+  }
+  /**
+   * Protobuf type {@code WorldState}
+   */
+  public  static final class WorldState extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:WorldState)
+      WorldStateOrBuilder {
+    // Use WorldState.newBuilder() to construct.
+    private WorldState(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private WorldState() {
+      worldSize_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private WorldState(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+
+              worldSize_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              com.nigelgott.terra.protobufs.Request.FloatCoord.Builder subBuilder = null;
+              if (playerLocation_ != null) {
+                subBuilder = playerLocation_.toBuilder();
+              }
+              playerLocation_ = input.readMessage(com.nigelgott.terra.protobufs.Request.FloatCoord.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(playerLocation_);
+                playerLocation_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.nigelgott.terra.protobufs.Response.internal_static_WorldState_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.nigelgott.terra.protobufs.Response.internal_static_WorldState_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.nigelgott.terra.protobufs.Response.WorldState.class, com.nigelgott.terra.protobufs.Response.WorldState.Builder.class);
+    }
+
+    public static final int WORLDSIZE_FIELD_NUMBER = 1;
+    private int worldSize_;
+    /**
+     * <code>optional int32 worldSize = 1;</code>
+     */
+    public int getWorldSize() {
+      return worldSize_;
+    }
+
+    public static final int PLAYERLOCATION_FIELD_NUMBER = 2;
+    private com.nigelgott.terra.protobufs.Request.FloatCoord playerLocation_;
+    /**
+     * <code>optional .FloatCoord playerLocation = 2;</code>
+     */
+    public boolean hasPlayerLocation() {
+      return playerLocation_ != null;
+    }
+    /**
+     * <code>optional .FloatCoord playerLocation = 2;</code>
+     */
+    public com.nigelgott.terra.protobufs.Request.FloatCoord getPlayerLocation() {
+      return playerLocation_ == null ? com.nigelgott.terra.protobufs.Request.FloatCoord.getDefaultInstance() : playerLocation_;
+    }
+    /**
+     * <code>optional .FloatCoord playerLocation = 2;</code>
+     */
+    public com.nigelgott.terra.protobufs.Request.FloatCoordOrBuilder getPlayerLocationOrBuilder() {
+      return getPlayerLocation();
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (worldSize_ != 0) {
+        output.writeInt32(1, worldSize_);
+      }
+      if (playerLocation_ != null) {
+        output.writeMessage(2, getPlayerLocation());
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (worldSize_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, worldSize_);
+      }
+      if (playerLocation_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getPlayerLocation());
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.nigelgott.terra.protobufs.Response.WorldState)) {
+        return super.equals(obj);
+      }
+      com.nigelgott.terra.protobufs.Response.WorldState other = (com.nigelgott.terra.protobufs.Response.WorldState) obj;
+
+      boolean result = true;
+      result = result && (getWorldSize()
+          == other.getWorldSize());
+      result = result && (hasPlayerLocation() == other.hasPlayerLocation());
+      if (hasPlayerLocation()) {
+        result = result && getPlayerLocation()
+            .equals(other.getPlayerLocation());
+      }
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (37 * hash) + WORLDSIZE_FIELD_NUMBER;
+      hash = (53 * hash) + getWorldSize();
+      if (hasPlayerLocation()) {
+        hash = (37 * hash) + PLAYERLOCATION_FIELD_NUMBER;
+        hash = (53 * hash) + getPlayerLocation().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.nigelgott.terra.protobufs.Response.WorldState parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.nigelgott.terra.protobufs.Response.WorldState parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.nigelgott.terra.protobufs.Response.WorldState parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.nigelgott.terra.protobufs.Response.WorldState parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.nigelgott.terra.protobufs.Response.WorldState parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.nigelgott.terra.protobufs.Response.WorldState parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.nigelgott.terra.protobufs.Response.WorldState parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.nigelgott.terra.protobufs.Response.WorldState parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.nigelgott.terra.protobufs.Response.WorldState parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.nigelgott.terra.protobufs.Response.WorldState parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.nigelgott.terra.protobufs.Response.WorldState prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code WorldState}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:WorldState)
+        com.nigelgott.terra.protobufs.Response.WorldStateOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.nigelgott.terra.protobufs.Response.internal_static_WorldState_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.nigelgott.terra.protobufs.Response.internal_static_WorldState_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.nigelgott.terra.protobufs.Response.WorldState.class, com.nigelgott.terra.protobufs.Response.WorldState.Builder.class);
+      }
+
+      // Construct using com.nigelgott.terra.protobufs.Response.WorldState.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        worldSize_ = 0;
+
+        if (playerLocationBuilder_ == null) {
+          playerLocation_ = null;
+        } else {
+          playerLocation_ = null;
+          playerLocationBuilder_ = null;
+        }
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.nigelgott.terra.protobufs.Response.internal_static_WorldState_descriptor;
+      }
+
+      public com.nigelgott.terra.protobufs.Response.WorldState getDefaultInstanceForType() {
+        return com.nigelgott.terra.protobufs.Response.WorldState.getDefaultInstance();
+      }
+
+      public com.nigelgott.terra.protobufs.Response.WorldState build() {
+        com.nigelgott.terra.protobufs.Response.WorldState result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.nigelgott.terra.protobufs.Response.WorldState buildPartial() {
+        com.nigelgott.terra.protobufs.Response.WorldState result = new com.nigelgott.terra.protobufs.Response.WorldState(this);
+        result.worldSize_ = worldSize_;
+        if (playerLocationBuilder_ == null) {
+          result.playerLocation_ = playerLocation_;
+        } else {
+          result.playerLocation_ = playerLocationBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.nigelgott.terra.protobufs.Response.WorldState) {
+          return mergeFrom((com.nigelgott.terra.protobufs.Response.WorldState)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.nigelgott.terra.protobufs.Response.WorldState other) {
+        if (other == com.nigelgott.terra.protobufs.Response.WorldState.getDefaultInstance()) return this;
+        if (other.getWorldSize() != 0) {
+          setWorldSize(other.getWorldSize());
+        }
+        if (other.hasPlayerLocation()) {
+          mergePlayerLocation(other.getPlayerLocation());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.nigelgott.terra.protobufs.Response.WorldState parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.nigelgott.terra.protobufs.Response.WorldState) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int worldSize_ ;
+      /**
+       * <code>optional int32 worldSize = 1;</code>
+       */
+      public int getWorldSize() {
+        return worldSize_;
+      }
+      /**
+       * <code>optional int32 worldSize = 1;</code>
+       */
+      public Builder setWorldSize(int value) {
+        
+        worldSize_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 worldSize = 1;</code>
+       */
+      public Builder clearWorldSize() {
+        
+        worldSize_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private com.nigelgott.terra.protobufs.Request.FloatCoord playerLocation_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.nigelgott.terra.protobufs.Request.FloatCoord, com.nigelgott.terra.protobufs.Request.FloatCoord.Builder, com.nigelgott.terra.protobufs.Request.FloatCoordOrBuilder> playerLocationBuilder_;
+      /**
+       * <code>optional .FloatCoord playerLocation = 2;</code>
+       */
+      public boolean hasPlayerLocation() {
+        return playerLocationBuilder_ != null || playerLocation_ != null;
+      }
+      /**
+       * <code>optional .FloatCoord playerLocation = 2;</code>
+       */
+      public com.nigelgott.terra.protobufs.Request.FloatCoord getPlayerLocation() {
+        if (playerLocationBuilder_ == null) {
+          return playerLocation_ == null ? com.nigelgott.terra.protobufs.Request.FloatCoord.getDefaultInstance() : playerLocation_;
+        } else {
+          return playerLocationBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .FloatCoord playerLocation = 2;</code>
+       */
+      public Builder setPlayerLocation(com.nigelgott.terra.protobufs.Request.FloatCoord value) {
+        if (playerLocationBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          playerLocation_ = value;
+          onChanged();
+        } else {
+          playerLocationBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .FloatCoord playerLocation = 2;</code>
+       */
+      public Builder setPlayerLocation(
+          com.nigelgott.terra.protobufs.Request.FloatCoord.Builder builderForValue) {
+        if (playerLocationBuilder_ == null) {
+          playerLocation_ = builderForValue.build();
+          onChanged();
+        } else {
+          playerLocationBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .FloatCoord playerLocation = 2;</code>
+       */
+      public Builder mergePlayerLocation(com.nigelgott.terra.protobufs.Request.FloatCoord value) {
+        if (playerLocationBuilder_ == null) {
+          if (playerLocation_ != null) {
+            playerLocation_ =
+              com.nigelgott.terra.protobufs.Request.FloatCoord.newBuilder(playerLocation_).mergeFrom(value).buildPartial();
+          } else {
+            playerLocation_ = value;
+          }
+          onChanged();
+        } else {
+          playerLocationBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .FloatCoord playerLocation = 2;</code>
+       */
+      public Builder clearPlayerLocation() {
+        if (playerLocationBuilder_ == null) {
+          playerLocation_ = null;
+          onChanged();
+        } else {
+          playerLocation_ = null;
+          playerLocationBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .FloatCoord playerLocation = 2;</code>
+       */
+      public com.nigelgott.terra.protobufs.Request.FloatCoord.Builder getPlayerLocationBuilder() {
+        
+        onChanged();
+        return getPlayerLocationFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .FloatCoord playerLocation = 2;</code>
+       */
+      public com.nigelgott.terra.protobufs.Request.FloatCoordOrBuilder getPlayerLocationOrBuilder() {
+        if (playerLocationBuilder_ != null) {
+          return playerLocationBuilder_.getMessageOrBuilder();
+        } else {
+          return playerLocation_ == null ?
+              com.nigelgott.terra.protobufs.Request.FloatCoord.getDefaultInstance() : playerLocation_;
+        }
+      }
+      /**
+       * <code>optional .FloatCoord playerLocation = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.nigelgott.terra.protobufs.Request.FloatCoord, com.nigelgott.terra.protobufs.Request.FloatCoord.Builder, com.nigelgott.terra.protobufs.Request.FloatCoordOrBuilder> 
+          getPlayerLocationFieldBuilder() {
+        if (playerLocationBuilder_ == null) {
+          playerLocationBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.nigelgott.terra.protobufs.Request.FloatCoord, com.nigelgott.terra.protobufs.Request.FloatCoord.Builder, com.nigelgott.terra.protobufs.Request.FloatCoordOrBuilder>(
+                  getPlayerLocation(),
+                  getParentForChildren(),
+                  isClean());
+          playerLocation_ = null;
+        }
+        return playerLocationBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:WorldState)
+    }
+
+    // @@protoc_insertion_point(class_scope:WorldState)
+    private static final com.nigelgott.terra.protobufs.Response.WorldState DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.nigelgott.terra.protobufs.Response.WorldState();
+    }
+
+    public static com.nigelgott.terra.protobufs.Response.WorldState getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<WorldState>
+        PARSER = new com.google.protobuf.AbstractParser<WorldState>() {
+      public WorldState parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new WorldState(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<WorldState> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<WorldState> getParserForType() {
+      return PARSER;
+    }
+
+    public com.nigelgott.terra.protobufs.Response.WorldState getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_ResponseMessage_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_ResponseMessage_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_WorldState_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_WorldState_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -639,11 +1204,14 @@ public final class Response {
   static {
     java.lang.String[] descriptorData = {
       "\n,com/nigelgott/terra/protobufs/response" +
-      ".proto\"s\n\017ResponseMessage\022+\n\004type\030\001 \001(\0162" +
-      "\035.ResponseMessage.ResponseType\022\026\n\016numOfR" +
-      "esponses\030\002 \001(\005\"\033\n\014ResponseType\022\013\n\007TERRAI" +
-      "N\020\000B;\n\035com.nigelgott.terra.protobufs\252\002\031N" +
-      "igelGott.Terra.Protobufsb\006proto3"
+      ".proto\032+com/nigelgott/terra/protobufs/re" +
+      "quest.proto\"_\n\017ResponseMessage\022+\n\004type\030\001" +
+      " \001(\0162\035.ResponseMessage.ResponseType\"\037\n\014R" +
+      "esponseType\022\017\n\013WORLD_STATE\020\000\"D\n\nWorldSta" +
+      "te\022\021\n\tworldSize\030\001 \001(\005\022#\n\016playerLocation\030" +
+      "\002 \001(\0132\013.FloatCoordB;\n\035com.nigelgott.terr" +
+      "a.protobufs\252\002\031NigelGott.Terra.Protobufsb" +
+      "\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -656,13 +1224,21 @@ public final class Response {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.nigelgott.terra.protobufs.Request.getDescriptor(),
         }, assigner);
     internal_static_ResponseMessage_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_ResponseMessage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ResponseMessage_descriptor,
-        new java.lang.String[] { "Type", "NumOfResponses", });
+        new java.lang.String[] { "Type", });
+    internal_static_WorldState_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_WorldState_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_WorldState_descriptor,
+        new java.lang.String[] { "WorldSize", "PlayerLocation", });
+    com.nigelgott.terra.protobufs.Request.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

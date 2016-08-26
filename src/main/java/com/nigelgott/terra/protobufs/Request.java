@@ -119,16 +119,32 @@ public final class Request {
     public enum RequestType
         implements com.google.protobuf.ProtocolMessageEnum {
       /**
-       * <code>INITIAL_WORLD_STATE = 0;</code>
+       * <code>WORLD_STATE = 0;</code>
        */
-      INITIAL_WORLD_STATE(0),
+      WORLD_STATE(0),
+      /**
+       * <code>TERRAIN_CHUNKS = 1;</code>
+       */
+      TERRAIN_CHUNKS(1),
+      /**
+       * <code>PLAYER_LOCATION_CHANGE = 2;</code>
+       */
+      PLAYER_LOCATION_CHANGE(2),
       UNRECOGNIZED(-1),
       ;
 
       /**
-       * <code>INITIAL_WORLD_STATE = 0;</code>
+       * <code>WORLD_STATE = 0;</code>
        */
-      public static final int INITIAL_WORLD_STATE_VALUE = 0;
+      public static final int WORLD_STATE_VALUE = 0;
+      /**
+       * <code>TERRAIN_CHUNKS = 1;</code>
+       */
+      public static final int TERRAIN_CHUNKS_VALUE = 1;
+      /**
+       * <code>PLAYER_LOCATION_CHANGE = 2;</code>
+       */
+      public static final int PLAYER_LOCATION_CHANGE_VALUE = 2;
 
 
       public final int getNumber() {
@@ -149,7 +165,9 @@ public final class Request {
 
       public static RequestType forNumber(int value) {
         switch (value) {
-          case 0: return INITIAL_WORLD_STATE;
+          case 0: return WORLD_STATE;
+          case 1: return TERRAIN_CHUNKS;
+          case 2: return PLAYER_LOCATION_CHANGE;
           default: return null;
         }
       }
@@ -264,7 +282,7 @@ public final class Request {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (type_ != com.nigelgott.terra.protobufs.Request.RequestMessage.RequestType.INITIAL_WORLD_STATE.getNumber()) {
+      if (type_ != com.nigelgott.terra.protobufs.Request.RequestMessage.RequestType.WORLD_STATE.getNumber()) {
         output.writeEnum(1, type_);
       }
       if (!getPlayerNameBytes().isEmpty()) {
@@ -277,7 +295,7 @@ public final class Request {
       if (size != -1) return size;
 
       size = 0;
-      if (type_ != com.nigelgott.terra.protobufs.Request.RequestMessage.RequestType.INITIAL_WORLD_STATE.getNumber()) {
+      if (type_ != com.nigelgott.terra.protobufs.Request.RequestMessage.RequestType.WORLD_STATE.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, type_);
       }
@@ -698,11 +716,1817 @@ public final class Request {
 
   }
 
+  public interface ChunkRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ChunkRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 chunkSize = 1;</code>
+     */
+    int getChunkSize();
+
+    /**
+     * <code>repeated .IntCoord chunkCoords = 2;</code>
+     */
+    java.util.List<com.nigelgott.terra.protobufs.Request.IntCoord> 
+        getChunkCoordsList();
+    /**
+     * <code>repeated .IntCoord chunkCoords = 2;</code>
+     */
+    com.nigelgott.terra.protobufs.Request.IntCoord getChunkCoords(int index);
+    /**
+     * <code>repeated .IntCoord chunkCoords = 2;</code>
+     */
+    int getChunkCoordsCount();
+    /**
+     * <code>repeated .IntCoord chunkCoords = 2;</code>
+     */
+    java.util.List<? extends com.nigelgott.terra.protobufs.Request.IntCoordOrBuilder> 
+        getChunkCoordsOrBuilderList();
+    /**
+     * <code>repeated .IntCoord chunkCoords = 2;</code>
+     */
+    com.nigelgott.terra.protobufs.Request.IntCoordOrBuilder getChunkCoordsOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code ChunkRequest}
+   */
+  public  static final class ChunkRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:ChunkRequest)
+      ChunkRequestOrBuilder {
+    // Use ChunkRequest.newBuilder() to construct.
+    private ChunkRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ChunkRequest() {
+      chunkSize_ = 0;
+      chunkCoords_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private ChunkRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+
+              chunkSize_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                chunkCoords_ = new java.util.ArrayList<com.nigelgott.terra.protobufs.Request.IntCoord>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              chunkCoords_.add(
+                  input.readMessage(com.nigelgott.terra.protobufs.Request.IntCoord.parser(), extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          chunkCoords_ = java.util.Collections.unmodifiableList(chunkCoords_);
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.nigelgott.terra.protobufs.Request.internal_static_ChunkRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.nigelgott.terra.protobufs.Request.internal_static_ChunkRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.nigelgott.terra.protobufs.Request.ChunkRequest.class, com.nigelgott.terra.protobufs.Request.ChunkRequest.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int CHUNKSIZE_FIELD_NUMBER = 1;
+    private int chunkSize_;
+    /**
+     * <code>optional int32 chunkSize = 1;</code>
+     */
+    public int getChunkSize() {
+      return chunkSize_;
+    }
+
+    public static final int CHUNKCOORDS_FIELD_NUMBER = 2;
+    private java.util.List<com.nigelgott.terra.protobufs.Request.IntCoord> chunkCoords_;
+    /**
+     * <code>repeated .IntCoord chunkCoords = 2;</code>
+     */
+    public java.util.List<com.nigelgott.terra.protobufs.Request.IntCoord> getChunkCoordsList() {
+      return chunkCoords_;
+    }
+    /**
+     * <code>repeated .IntCoord chunkCoords = 2;</code>
+     */
+    public java.util.List<? extends com.nigelgott.terra.protobufs.Request.IntCoordOrBuilder> 
+        getChunkCoordsOrBuilderList() {
+      return chunkCoords_;
+    }
+    /**
+     * <code>repeated .IntCoord chunkCoords = 2;</code>
+     */
+    public int getChunkCoordsCount() {
+      return chunkCoords_.size();
+    }
+    /**
+     * <code>repeated .IntCoord chunkCoords = 2;</code>
+     */
+    public com.nigelgott.terra.protobufs.Request.IntCoord getChunkCoords(int index) {
+      return chunkCoords_.get(index);
+    }
+    /**
+     * <code>repeated .IntCoord chunkCoords = 2;</code>
+     */
+    public com.nigelgott.terra.protobufs.Request.IntCoordOrBuilder getChunkCoordsOrBuilder(
+        int index) {
+      return chunkCoords_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (chunkSize_ != 0) {
+        output.writeInt32(1, chunkSize_);
+      }
+      for (int i = 0; i < chunkCoords_.size(); i++) {
+        output.writeMessage(2, chunkCoords_.get(i));
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (chunkSize_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, chunkSize_);
+      }
+      for (int i = 0; i < chunkCoords_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, chunkCoords_.get(i));
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.nigelgott.terra.protobufs.Request.ChunkRequest)) {
+        return super.equals(obj);
+      }
+      com.nigelgott.terra.protobufs.Request.ChunkRequest other = (com.nigelgott.terra.protobufs.Request.ChunkRequest) obj;
+
+      boolean result = true;
+      result = result && (getChunkSize()
+          == other.getChunkSize());
+      result = result && getChunkCoordsList()
+          .equals(other.getChunkCoordsList());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (37 * hash) + CHUNKSIZE_FIELD_NUMBER;
+      hash = (53 * hash) + getChunkSize();
+      if (getChunkCoordsCount() > 0) {
+        hash = (37 * hash) + CHUNKCOORDS_FIELD_NUMBER;
+        hash = (53 * hash) + getChunkCoordsList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.nigelgott.terra.protobufs.Request.ChunkRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.nigelgott.terra.protobufs.Request.ChunkRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.nigelgott.terra.protobufs.Request.ChunkRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.nigelgott.terra.protobufs.Request.ChunkRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.nigelgott.terra.protobufs.Request.ChunkRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.nigelgott.terra.protobufs.Request.ChunkRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.nigelgott.terra.protobufs.Request.ChunkRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.nigelgott.terra.protobufs.Request.ChunkRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.nigelgott.terra.protobufs.Request.ChunkRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.nigelgott.terra.protobufs.Request.ChunkRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.nigelgott.terra.protobufs.Request.ChunkRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ChunkRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ChunkRequest)
+        com.nigelgott.terra.protobufs.Request.ChunkRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.nigelgott.terra.protobufs.Request.internal_static_ChunkRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.nigelgott.terra.protobufs.Request.internal_static_ChunkRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.nigelgott.terra.protobufs.Request.ChunkRequest.class, com.nigelgott.terra.protobufs.Request.ChunkRequest.Builder.class);
+      }
+
+      // Construct using com.nigelgott.terra.protobufs.Request.ChunkRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getChunkCoordsFieldBuilder();
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        chunkSize_ = 0;
+
+        if (chunkCoordsBuilder_ == null) {
+          chunkCoords_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          chunkCoordsBuilder_.clear();
+        }
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.nigelgott.terra.protobufs.Request.internal_static_ChunkRequest_descriptor;
+      }
+
+      public com.nigelgott.terra.protobufs.Request.ChunkRequest getDefaultInstanceForType() {
+        return com.nigelgott.terra.protobufs.Request.ChunkRequest.getDefaultInstance();
+      }
+
+      public com.nigelgott.terra.protobufs.Request.ChunkRequest build() {
+        com.nigelgott.terra.protobufs.Request.ChunkRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.nigelgott.terra.protobufs.Request.ChunkRequest buildPartial() {
+        com.nigelgott.terra.protobufs.Request.ChunkRequest result = new com.nigelgott.terra.protobufs.Request.ChunkRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        result.chunkSize_ = chunkSize_;
+        if (chunkCoordsBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            chunkCoords_ = java.util.Collections.unmodifiableList(chunkCoords_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.chunkCoords_ = chunkCoords_;
+        } else {
+          result.chunkCoords_ = chunkCoordsBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.nigelgott.terra.protobufs.Request.ChunkRequest) {
+          return mergeFrom((com.nigelgott.terra.protobufs.Request.ChunkRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.nigelgott.terra.protobufs.Request.ChunkRequest other) {
+        if (other == com.nigelgott.terra.protobufs.Request.ChunkRequest.getDefaultInstance()) return this;
+        if (other.getChunkSize() != 0) {
+          setChunkSize(other.getChunkSize());
+        }
+        if (chunkCoordsBuilder_ == null) {
+          if (!other.chunkCoords_.isEmpty()) {
+            if (chunkCoords_.isEmpty()) {
+              chunkCoords_ = other.chunkCoords_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureChunkCoordsIsMutable();
+              chunkCoords_.addAll(other.chunkCoords_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.chunkCoords_.isEmpty()) {
+            if (chunkCoordsBuilder_.isEmpty()) {
+              chunkCoordsBuilder_.dispose();
+              chunkCoordsBuilder_ = null;
+              chunkCoords_ = other.chunkCoords_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              chunkCoordsBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getChunkCoordsFieldBuilder() : null;
+            } else {
+              chunkCoordsBuilder_.addAllMessages(other.chunkCoords_);
+            }
+          }
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.nigelgott.terra.protobufs.Request.ChunkRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.nigelgott.terra.protobufs.Request.ChunkRequest) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int chunkSize_ ;
+      /**
+       * <code>optional int32 chunkSize = 1;</code>
+       */
+      public int getChunkSize() {
+        return chunkSize_;
+      }
+      /**
+       * <code>optional int32 chunkSize = 1;</code>
+       */
+      public Builder setChunkSize(int value) {
+        
+        chunkSize_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 chunkSize = 1;</code>
+       */
+      public Builder clearChunkSize() {
+        
+        chunkSize_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<com.nigelgott.terra.protobufs.Request.IntCoord> chunkCoords_ =
+        java.util.Collections.emptyList();
+      private void ensureChunkCoordsIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          chunkCoords_ = new java.util.ArrayList<com.nigelgott.terra.protobufs.Request.IntCoord>(chunkCoords_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.nigelgott.terra.protobufs.Request.IntCoord, com.nigelgott.terra.protobufs.Request.IntCoord.Builder, com.nigelgott.terra.protobufs.Request.IntCoordOrBuilder> chunkCoordsBuilder_;
+
+      /**
+       * <code>repeated .IntCoord chunkCoords = 2;</code>
+       */
+      public java.util.List<com.nigelgott.terra.protobufs.Request.IntCoord> getChunkCoordsList() {
+        if (chunkCoordsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(chunkCoords_);
+        } else {
+          return chunkCoordsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .IntCoord chunkCoords = 2;</code>
+       */
+      public int getChunkCoordsCount() {
+        if (chunkCoordsBuilder_ == null) {
+          return chunkCoords_.size();
+        } else {
+          return chunkCoordsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .IntCoord chunkCoords = 2;</code>
+       */
+      public com.nigelgott.terra.protobufs.Request.IntCoord getChunkCoords(int index) {
+        if (chunkCoordsBuilder_ == null) {
+          return chunkCoords_.get(index);
+        } else {
+          return chunkCoordsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .IntCoord chunkCoords = 2;</code>
+       */
+      public Builder setChunkCoords(
+          int index, com.nigelgott.terra.protobufs.Request.IntCoord value) {
+        if (chunkCoordsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureChunkCoordsIsMutable();
+          chunkCoords_.set(index, value);
+          onChanged();
+        } else {
+          chunkCoordsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .IntCoord chunkCoords = 2;</code>
+       */
+      public Builder setChunkCoords(
+          int index, com.nigelgott.terra.protobufs.Request.IntCoord.Builder builderForValue) {
+        if (chunkCoordsBuilder_ == null) {
+          ensureChunkCoordsIsMutable();
+          chunkCoords_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          chunkCoordsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .IntCoord chunkCoords = 2;</code>
+       */
+      public Builder addChunkCoords(com.nigelgott.terra.protobufs.Request.IntCoord value) {
+        if (chunkCoordsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureChunkCoordsIsMutable();
+          chunkCoords_.add(value);
+          onChanged();
+        } else {
+          chunkCoordsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .IntCoord chunkCoords = 2;</code>
+       */
+      public Builder addChunkCoords(
+          int index, com.nigelgott.terra.protobufs.Request.IntCoord value) {
+        if (chunkCoordsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureChunkCoordsIsMutable();
+          chunkCoords_.add(index, value);
+          onChanged();
+        } else {
+          chunkCoordsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .IntCoord chunkCoords = 2;</code>
+       */
+      public Builder addChunkCoords(
+          com.nigelgott.terra.protobufs.Request.IntCoord.Builder builderForValue) {
+        if (chunkCoordsBuilder_ == null) {
+          ensureChunkCoordsIsMutable();
+          chunkCoords_.add(builderForValue.build());
+          onChanged();
+        } else {
+          chunkCoordsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .IntCoord chunkCoords = 2;</code>
+       */
+      public Builder addChunkCoords(
+          int index, com.nigelgott.terra.protobufs.Request.IntCoord.Builder builderForValue) {
+        if (chunkCoordsBuilder_ == null) {
+          ensureChunkCoordsIsMutable();
+          chunkCoords_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          chunkCoordsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .IntCoord chunkCoords = 2;</code>
+       */
+      public Builder addAllChunkCoords(
+          java.lang.Iterable<? extends com.nigelgott.terra.protobufs.Request.IntCoord> values) {
+        if (chunkCoordsBuilder_ == null) {
+          ensureChunkCoordsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, chunkCoords_);
+          onChanged();
+        } else {
+          chunkCoordsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .IntCoord chunkCoords = 2;</code>
+       */
+      public Builder clearChunkCoords() {
+        if (chunkCoordsBuilder_ == null) {
+          chunkCoords_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          chunkCoordsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .IntCoord chunkCoords = 2;</code>
+       */
+      public Builder removeChunkCoords(int index) {
+        if (chunkCoordsBuilder_ == null) {
+          ensureChunkCoordsIsMutable();
+          chunkCoords_.remove(index);
+          onChanged();
+        } else {
+          chunkCoordsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .IntCoord chunkCoords = 2;</code>
+       */
+      public com.nigelgott.terra.protobufs.Request.IntCoord.Builder getChunkCoordsBuilder(
+          int index) {
+        return getChunkCoordsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .IntCoord chunkCoords = 2;</code>
+       */
+      public com.nigelgott.terra.protobufs.Request.IntCoordOrBuilder getChunkCoordsOrBuilder(
+          int index) {
+        if (chunkCoordsBuilder_ == null) {
+          return chunkCoords_.get(index);  } else {
+          return chunkCoordsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .IntCoord chunkCoords = 2;</code>
+       */
+      public java.util.List<? extends com.nigelgott.terra.protobufs.Request.IntCoordOrBuilder> 
+           getChunkCoordsOrBuilderList() {
+        if (chunkCoordsBuilder_ != null) {
+          return chunkCoordsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(chunkCoords_);
+        }
+      }
+      /**
+       * <code>repeated .IntCoord chunkCoords = 2;</code>
+       */
+      public com.nigelgott.terra.protobufs.Request.IntCoord.Builder addChunkCoordsBuilder() {
+        return getChunkCoordsFieldBuilder().addBuilder(
+            com.nigelgott.terra.protobufs.Request.IntCoord.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .IntCoord chunkCoords = 2;</code>
+       */
+      public com.nigelgott.terra.protobufs.Request.IntCoord.Builder addChunkCoordsBuilder(
+          int index) {
+        return getChunkCoordsFieldBuilder().addBuilder(
+            index, com.nigelgott.terra.protobufs.Request.IntCoord.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .IntCoord chunkCoords = 2;</code>
+       */
+      public java.util.List<com.nigelgott.terra.protobufs.Request.IntCoord.Builder> 
+           getChunkCoordsBuilderList() {
+        return getChunkCoordsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.nigelgott.terra.protobufs.Request.IntCoord, com.nigelgott.terra.protobufs.Request.IntCoord.Builder, com.nigelgott.terra.protobufs.Request.IntCoordOrBuilder> 
+          getChunkCoordsFieldBuilder() {
+        if (chunkCoordsBuilder_ == null) {
+          chunkCoordsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.nigelgott.terra.protobufs.Request.IntCoord, com.nigelgott.terra.protobufs.Request.IntCoord.Builder, com.nigelgott.terra.protobufs.Request.IntCoordOrBuilder>(
+                  chunkCoords_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          chunkCoords_ = null;
+        }
+        return chunkCoordsBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:ChunkRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:ChunkRequest)
+    private static final com.nigelgott.terra.protobufs.Request.ChunkRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.nigelgott.terra.protobufs.Request.ChunkRequest();
+    }
+
+    public static com.nigelgott.terra.protobufs.Request.ChunkRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ChunkRequest>
+        PARSER = new com.google.protobuf.AbstractParser<ChunkRequest>() {
+      public ChunkRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new ChunkRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ChunkRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ChunkRequest> getParserForType() {
+      return PARSER;
+    }
+
+    public com.nigelgott.terra.protobufs.Request.ChunkRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface IntCoordOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:IntCoord)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 x = 1;</code>
+     */
+    int getX();
+
+    /**
+     * <code>optional int32 y = 2;</code>
+     */
+    int getY();
+  }
+  /**
+   * Protobuf type {@code IntCoord}
+   */
+  public  static final class IntCoord extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:IntCoord)
+      IntCoordOrBuilder {
+    // Use IntCoord.newBuilder() to construct.
+    private IntCoord(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private IntCoord() {
+      x_ = 0;
+      y_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private IntCoord(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+
+              x_ = input.readInt32();
+              break;
+            }
+            case 16: {
+
+              y_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.nigelgott.terra.protobufs.Request.internal_static_IntCoord_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.nigelgott.terra.protobufs.Request.internal_static_IntCoord_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.nigelgott.terra.protobufs.Request.IntCoord.class, com.nigelgott.terra.protobufs.Request.IntCoord.Builder.class);
+    }
+
+    public static final int X_FIELD_NUMBER = 1;
+    private int x_;
+    /**
+     * <code>optional int32 x = 1;</code>
+     */
+    public int getX() {
+      return x_;
+    }
+
+    public static final int Y_FIELD_NUMBER = 2;
+    private int y_;
+    /**
+     * <code>optional int32 y = 2;</code>
+     */
+    public int getY() {
+      return y_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (x_ != 0) {
+        output.writeInt32(1, x_);
+      }
+      if (y_ != 0) {
+        output.writeInt32(2, y_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (x_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, x_);
+      }
+      if (y_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, y_);
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.nigelgott.terra.protobufs.Request.IntCoord)) {
+        return super.equals(obj);
+      }
+      com.nigelgott.terra.protobufs.Request.IntCoord other = (com.nigelgott.terra.protobufs.Request.IntCoord) obj;
+
+      boolean result = true;
+      result = result && (getX()
+          == other.getX());
+      result = result && (getY()
+          == other.getY());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (37 * hash) + X_FIELD_NUMBER;
+      hash = (53 * hash) + getX();
+      hash = (37 * hash) + Y_FIELD_NUMBER;
+      hash = (53 * hash) + getY();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.nigelgott.terra.protobufs.Request.IntCoord parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.nigelgott.terra.protobufs.Request.IntCoord parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.nigelgott.terra.protobufs.Request.IntCoord parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.nigelgott.terra.protobufs.Request.IntCoord parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.nigelgott.terra.protobufs.Request.IntCoord parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.nigelgott.terra.protobufs.Request.IntCoord parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.nigelgott.terra.protobufs.Request.IntCoord parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.nigelgott.terra.protobufs.Request.IntCoord parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.nigelgott.terra.protobufs.Request.IntCoord parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.nigelgott.terra.protobufs.Request.IntCoord parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.nigelgott.terra.protobufs.Request.IntCoord prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code IntCoord}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:IntCoord)
+        com.nigelgott.terra.protobufs.Request.IntCoordOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.nigelgott.terra.protobufs.Request.internal_static_IntCoord_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.nigelgott.terra.protobufs.Request.internal_static_IntCoord_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.nigelgott.terra.protobufs.Request.IntCoord.class, com.nigelgott.terra.protobufs.Request.IntCoord.Builder.class);
+      }
+
+      // Construct using com.nigelgott.terra.protobufs.Request.IntCoord.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        x_ = 0;
+
+        y_ = 0;
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.nigelgott.terra.protobufs.Request.internal_static_IntCoord_descriptor;
+      }
+
+      public com.nigelgott.terra.protobufs.Request.IntCoord getDefaultInstanceForType() {
+        return com.nigelgott.terra.protobufs.Request.IntCoord.getDefaultInstance();
+      }
+
+      public com.nigelgott.terra.protobufs.Request.IntCoord build() {
+        com.nigelgott.terra.protobufs.Request.IntCoord result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.nigelgott.terra.protobufs.Request.IntCoord buildPartial() {
+        com.nigelgott.terra.protobufs.Request.IntCoord result = new com.nigelgott.terra.protobufs.Request.IntCoord(this);
+        result.x_ = x_;
+        result.y_ = y_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.nigelgott.terra.protobufs.Request.IntCoord) {
+          return mergeFrom((com.nigelgott.terra.protobufs.Request.IntCoord)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.nigelgott.terra.protobufs.Request.IntCoord other) {
+        if (other == com.nigelgott.terra.protobufs.Request.IntCoord.getDefaultInstance()) return this;
+        if (other.getX() != 0) {
+          setX(other.getX());
+        }
+        if (other.getY() != 0) {
+          setY(other.getY());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.nigelgott.terra.protobufs.Request.IntCoord parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.nigelgott.terra.protobufs.Request.IntCoord) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int x_ ;
+      /**
+       * <code>optional int32 x = 1;</code>
+       */
+      public int getX() {
+        return x_;
+      }
+      /**
+       * <code>optional int32 x = 1;</code>
+       */
+      public Builder setX(int value) {
+        
+        x_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 x = 1;</code>
+       */
+      public Builder clearX() {
+        
+        x_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int y_ ;
+      /**
+       * <code>optional int32 y = 2;</code>
+       */
+      public int getY() {
+        return y_;
+      }
+      /**
+       * <code>optional int32 y = 2;</code>
+       */
+      public Builder setY(int value) {
+        
+        y_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 y = 2;</code>
+       */
+      public Builder clearY() {
+        
+        y_ = 0;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:IntCoord)
+    }
+
+    // @@protoc_insertion_point(class_scope:IntCoord)
+    private static final com.nigelgott.terra.protobufs.Request.IntCoord DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.nigelgott.terra.protobufs.Request.IntCoord();
+    }
+
+    public static com.nigelgott.terra.protobufs.Request.IntCoord getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<IntCoord>
+        PARSER = new com.google.protobuf.AbstractParser<IntCoord>() {
+      public IntCoord parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new IntCoord(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<IntCoord> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<IntCoord> getParserForType() {
+      return PARSER;
+    }
+
+    public com.nigelgott.terra.protobufs.Request.IntCoord getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface FloatCoordOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:FloatCoord)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional float x = 1;</code>
+     */
+    float getX();
+
+    /**
+     * <code>optional float y = 2;</code>
+     */
+    float getY();
+  }
+  /**
+   * Protobuf type {@code FloatCoord}
+   */
+  public  static final class FloatCoord extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:FloatCoord)
+      FloatCoordOrBuilder {
+    // Use FloatCoord.newBuilder() to construct.
+    private FloatCoord(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private FloatCoord() {
+      x_ = 0F;
+      y_ = 0F;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private FloatCoord(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 13: {
+
+              x_ = input.readFloat();
+              break;
+            }
+            case 21: {
+
+              y_ = input.readFloat();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.nigelgott.terra.protobufs.Request.internal_static_FloatCoord_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.nigelgott.terra.protobufs.Request.internal_static_FloatCoord_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.nigelgott.terra.protobufs.Request.FloatCoord.class, com.nigelgott.terra.protobufs.Request.FloatCoord.Builder.class);
+    }
+
+    public static final int X_FIELD_NUMBER = 1;
+    private float x_;
+    /**
+     * <code>optional float x = 1;</code>
+     */
+    public float getX() {
+      return x_;
+    }
+
+    public static final int Y_FIELD_NUMBER = 2;
+    private float y_;
+    /**
+     * <code>optional float y = 2;</code>
+     */
+    public float getY() {
+      return y_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (x_ != 0F) {
+        output.writeFloat(1, x_);
+      }
+      if (y_ != 0F) {
+        output.writeFloat(2, y_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (x_ != 0F) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(1, x_);
+      }
+      if (y_ != 0F) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(2, y_);
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.nigelgott.terra.protobufs.Request.FloatCoord)) {
+        return super.equals(obj);
+      }
+      com.nigelgott.terra.protobufs.Request.FloatCoord other = (com.nigelgott.terra.protobufs.Request.FloatCoord) obj;
+
+      boolean result = true;
+      result = result && (
+          java.lang.Float.floatToIntBits(getX())
+          == java.lang.Float.floatToIntBits(
+              other.getX()));
+      result = result && (
+          java.lang.Float.floatToIntBits(getY())
+          == java.lang.Float.floatToIntBits(
+              other.getY()));
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (37 * hash) + X_FIELD_NUMBER;
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getX());
+      hash = (37 * hash) + Y_FIELD_NUMBER;
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getY());
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.nigelgott.terra.protobufs.Request.FloatCoord parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.nigelgott.terra.protobufs.Request.FloatCoord parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.nigelgott.terra.protobufs.Request.FloatCoord parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.nigelgott.terra.protobufs.Request.FloatCoord parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.nigelgott.terra.protobufs.Request.FloatCoord parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.nigelgott.terra.protobufs.Request.FloatCoord parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.nigelgott.terra.protobufs.Request.FloatCoord parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.nigelgott.terra.protobufs.Request.FloatCoord parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.nigelgott.terra.protobufs.Request.FloatCoord parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.nigelgott.terra.protobufs.Request.FloatCoord parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.nigelgott.terra.protobufs.Request.FloatCoord prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code FloatCoord}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:FloatCoord)
+        com.nigelgott.terra.protobufs.Request.FloatCoordOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.nigelgott.terra.protobufs.Request.internal_static_FloatCoord_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.nigelgott.terra.protobufs.Request.internal_static_FloatCoord_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.nigelgott.terra.protobufs.Request.FloatCoord.class, com.nigelgott.terra.protobufs.Request.FloatCoord.Builder.class);
+      }
+
+      // Construct using com.nigelgott.terra.protobufs.Request.FloatCoord.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        x_ = 0F;
+
+        y_ = 0F;
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.nigelgott.terra.protobufs.Request.internal_static_FloatCoord_descriptor;
+      }
+
+      public com.nigelgott.terra.protobufs.Request.FloatCoord getDefaultInstanceForType() {
+        return com.nigelgott.terra.protobufs.Request.FloatCoord.getDefaultInstance();
+      }
+
+      public com.nigelgott.terra.protobufs.Request.FloatCoord build() {
+        com.nigelgott.terra.protobufs.Request.FloatCoord result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.nigelgott.terra.protobufs.Request.FloatCoord buildPartial() {
+        com.nigelgott.terra.protobufs.Request.FloatCoord result = new com.nigelgott.terra.protobufs.Request.FloatCoord(this);
+        result.x_ = x_;
+        result.y_ = y_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.nigelgott.terra.protobufs.Request.FloatCoord) {
+          return mergeFrom((com.nigelgott.terra.protobufs.Request.FloatCoord)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.nigelgott.terra.protobufs.Request.FloatCoord other) {
+        if (other == com.nigelgott.terra.protobufs.Request.FloatCoord.getDefaultInstance()) return this;
+        if (other.getX() != 0F) {
+          setX(other.getX());
+        }
+        if (other.getY() != 0F) {
+          setY(other.getY());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.nigelgott.terra.protobufs.Request.FloatCoord parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.nigelgott.terra.protobufs.Request.FloatCoord) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private float x_ ;
+      /**
+       * <code>optional float x = 1;</code>
+       */
+      public float getX() {
+        return x_;
+      }
+      /**
+       * <code>optional float x = 1;</code>
+       */
+      public Builder setX(float value) {
+        
+        x_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional float x = 1;</code>
+       */
+      public Builder clearX() {
+        
+        x_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      private float y_ ;
+      /**
+       * <code>optional float y = 2;</code>
+       */
+      public float getY() {
+        return y_;
+      }
+      /**
+       * <code>optional float y = 2;</code>
+       */
+      public Builder setY(float value) {
+        
+        y_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional float y = 2;</code>
+       */
+      public Builder clearY() {
+        
+        y_ = 0F;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:FloatCoord)
+    }
+
+    // @@protoc_insertion_point(class_scope:FloatCoord)
+    private static final com.nigelgott.terra.protobufs.Request.FloatCoord DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.nigelgott.terra.protobufs.Request.FloatCoord();
+    }
+
+    public static com.nigelgott.terra.protobufs.Request.FloatCoord getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<FloatCoord>
+        PARSER = new com.google.protobuf.AbstractParser<FloatCoord>() {
+      public FloatCoord parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new FloatCoord(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<FloatCoord> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<FloatCoord> getParserForType() {
+      return PARSER;
+    }
+
+    public com.nigelgott.terra.protobufs.Request.FloatCoord getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_RequestMessage_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_RequestMessage_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ChunkRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ChunkRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_IntCoord_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_IntCoord_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_FloatCoord_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_FloatCoord_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -713,11 +2537,16 @@ public final class Request {
   static {
     java.lang.String[] descriptorData = {
       "\n+com/nigelgott/terra/protobufs/request." +
-      "proto\"w\n\016RequestMessage\022)\n\004type\030\001 \001(\0162\033." +
-      "RequestMessage.RequestType\022\022\n\nplayerName" +
-      "\030\002 \001(\t\"&\n\013RequestType\022\027\n\023INITIAL_WORLD_S" +
-      "TATE\020\000B;\n\035com.nigelgott.terra.protobufs\252" +
-      "\002\031NigelGott.Terra.Protobufsb\006proto3"
+      "proto\"\237\001\n\016RequestMessage\022)\n\004type\030\001 \001(\0162\033" +
+      ".RequestMessage.RequestType\022\022\n\nplayerNam" +
+      "e\030\002 \001(\t\"N\n\013RequestType\022\017\n\013WORLD_STATE\020\000\022" +
+      "\022\n\016TERRAIN_CHUNKS\020\001\022\032\n\026PLAYER_LOCATION_C" +
+      "HANGE\020\002\"A\n\014ChunkRequest\022\021\n\tchunkSize\030\001 \001" +
+      "(\005\022\036\n\013chunkCoords\030\002 \003(\0132\t.IntCoord\" \n\010In" +
+      "tCoord\022\t\n\001x\030\001 \001(\005\022\t\n\001y\030\002 \001(\005\"\"\n\nFloatCoo" +
+      "rd\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002B;\n\035com.nigelgot" +
+      "t.terra.protobufs\252\002\031NigelGott.Terra.Prot",
+      "obufsb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -737,6 +2566,24 @@ public final class Request {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_RequestMessage_descriptor,
         new java.lang.String[] { "Type", "PlayerName", });
+    internal_static_ChunkRequest_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_ChunkRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ChunkRequest_descriptor,
+        new java.lang.String[] { "ChunkSize", "ChunkCoords", });
+    internal_static_IntCoord_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_IntCoord_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_IntCoord_descriptor,
+        new java.lang.String[] { "X", "Y", });
+    internal_static_FloatCoord_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_FloatCoord_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_FloatCoord_descriptor,
+        new java.lang.String[] { "X", "Y", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
